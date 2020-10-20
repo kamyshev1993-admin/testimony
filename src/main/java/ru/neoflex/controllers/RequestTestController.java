@@ -1,12 +1,14 @@
 package ru.neoflex.controllers;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import ru.neoflex.model.IRequest;
+
 import static io.restassured.RestAssured.given;
 
 public class RequestTestController {
 
-    public static int getRequestCode(String url, IRequest request) {
+    public static Response getResponse(String url, IRequest request) {
         return given()
                 .contentType(ContentType.JSON)
                 .body(request)
@@ -14,8 +16,7 @@ public class RequestTestController {
                 .post(url)
                 .then()
                 .extract()
-                .response()
-                .getStatusCode();
+                .response();
     }
 
     public static int getRequestCode(String url, String value) {
