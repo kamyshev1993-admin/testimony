@@ -24,4 +24,12 @@ public class RequestTestController {
                 .get(url + "/" + value)
                 .getStatusCode();
     }
+
+    public static Response getResponse(String url, String value) {
+        return given()
+                .get(url + "/" + value)
+                .then()
+                .extract()
+                .response();
+    }
 }

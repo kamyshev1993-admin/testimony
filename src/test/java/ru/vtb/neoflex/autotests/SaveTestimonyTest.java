@@ -4,15 +4,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.neoflex.controllers.RequestTestController;
-import ru.neoflex.model.testimony.CurrentTestimony;
+import ru.neoflex.dao.MySqlConnector;
 import ru.neoflex.model.testimony.RequestSaveTestimony;
 import ru.neoflex.model.testimony.ResponseSaveTestimony;
+import ru.neoflex.model.testimony.Testimony;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class SaveTestimonyTest {
 
     private String url = "http://localhost:8080/services/testimony/save";
     private RequestSaveTestimony requestSaveTestimony = new RequestSaveTestimony();
-    private CurrentTestimony currentTestimony = new CurrentTestimony();
+    private Testimony currentTestimony = new Testimony();
 
     @Before
     public void prepareData() {
@@ -31,9 +35,17 @@ public class SaveTestimonyTest {
     }
 
     @Test
-    public void checkBodySuccessTest() {
+    public void checkBodySuccessTest() throws SQLException {
         ResponseSaveTestimony responseSaveTestimony = RequestTestController.getResponse(url, requestSaveTestimony).as(ResponseSaveTestimony.class);
         Assert.assertEquals(requestSaveTestimony.getDate(), responseSaveTestimony.getDate());
         Assert.assertEquals(currentTestimony, responseSaveTestimony.getCurrentTestimony());
+
+        ResultSet resultSet = MySqlConnector.selectAllFromBilling(requestSaveTestimony.getDate());
+        Assert.assertTrue(resultSet.next());
+        Assert.assertEquals(requestSaveTestimony.getDate(), resultSet.getString("currentmonth"));
+        Assert.assertEquals(currentTestimony.getColdWater(), resultSet.getInt("coldWater"));
+        Assert.assertEquals(currentTestimony.getElectricity(), resultSet.getInt("electricity"));
+        Assert.assertEquals(currentTestimony.getGas(), resultSet.getInt("gas"));
+        Assert.assertEquals(currentTestimony.getHotWater(), resultSet.getInt("hotWater"));
     }
 }

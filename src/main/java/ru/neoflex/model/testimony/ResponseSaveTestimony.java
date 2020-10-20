@@ -1,33 +1,29 @@
 package ru.neoflex.model.testimony;
 
 import com.google.gson.annotations.SerializedName;
-import ru.neoflex.model.testimony.Consumed;
-import ru.neoflex.model.testimony.Cost;
-import ru.neoflex.model.testimony.PreviousTestimony;
-import ru.neoflex.model.testimony.CurrentTestimony;
 
-public class ResponseSaveTestimony{
+public class ResponseSaveTestimony {
 
 	@SerializedName("date")
 	private String date;
 
-	@SerializedName("consumed")
-	private Consumed consumed;
+	@SerializedName("previousDate")
+	private String previousDate;
+
+	@SerializedName("currentTestimony")
+	private Testimony currentTestimony;
 
 	@SerializedName("previousTestimony")
-	private PreviousTestimony previousTestimony;
+	private Testimony previousTestimony;
+
+	@SerializedName("consumed")
+	private Consumed consumed;
 
 	@SerializedName("cost")
 	private Cost cost;
 
-	@SerializedName("previousDate")
-	private String previousDate;
-
 	@SerializedName("totalCost")
 	private double totalCost;
-
-	@SerializedName("currentTestimony")
-	private CurrentTestimony currentTestimony;
 
 	public String getDate(){
 		return date;
@@ -37,7 +33,7 @@ public class ResponseSaveTestimony{
 		return consumed;
 	}
 
-	public PreviousTestimony getPreviousTestimony(){
+	public Testimony getPreviousTestimony(){
 		return previousTestimony;
 	}
 
@@ -53,7 +49,7 @@ public class ResponseSaveTestimony{
 		return totalCost;
 	}
 
-	public CurrentTestimony getCurrentTestimony(){
+	public Testimony getCurrentTestimony(){
 		return currentTestimony;
 	}
 }

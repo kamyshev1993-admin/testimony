@@ -9,7 +9,7 @@ public class RequestSaveTestimony implements IRequest {
 	private String date;
 
 	@SerializedName("currentTestimony")
-	private CurrentTestimony currentTestimony;
+	private Testimony currentTestimony;
 
 	public void setDate(String date){
 		this.date = date;
@@ -19,11 +19,11 @@ public class RequestSaveTestimony implements IRequest {
 		return date;
 	}
 
-	public void setCurrentTestimony(CurrentTestimony currentTestimony){
+	public void setCurrentTestimony(Testimony currentTestimony){
 		this.currentTestimony = currentTestimony;
 	}
 
-	public CurrentTestimony getCurrentTestimony(){
+	public Testimony getCurrentTestimony(){
 		return currentTestimony;
 	}
 
