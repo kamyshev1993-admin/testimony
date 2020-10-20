@@ -2,7 +2,7 @@ package ru.neoflex.model.testimony;
 
 import com.google.gson.annotations.SerializedName;
 
-public class CurrentTestimony{
+public class CurrentTestimony {
 
 	@SerializedName("coldWater")
 	private int coldWater;
@@ -30,5 +30,21 @@ public class CurrentTestimony{
 
 	public int getHotWater(){
 		return hotWater;
+	}
+
+	public void setColdWater(int coldWater) {
+		this.coldWater = coldWater;
+	}
+
+	public void setGas(int gas) {
+		this.gas = gas;
+	}
+
+	public void setElectricity(int electricity) {
+		this.electricity = electricity;
+	}
+
+	public void setHotWater(int hotWater) {
+		this.hotWater = hotWater;
 	}
 }

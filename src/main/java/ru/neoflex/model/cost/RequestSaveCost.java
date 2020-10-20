@@ -1,6 +1,8 @@
 package ru.neoflex.model.cost;
 
-public class RequestSaveCost{
+import ru.neoflex.model.IRequest;
+
+public class RequestSaveCost implements IRequest {
 	private Price price;
 
 	public void setPrice(Price price){

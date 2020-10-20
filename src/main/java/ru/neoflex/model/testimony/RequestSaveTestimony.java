@@ -1,9 +1,9 @@
 package ru.neoflex.model.testimony;
 
 import com.google.gson.annotations.SerializedName;
-import ru.neoflex.model.testimony.CurrentTestimony;
+import ru.neoflex.model.IRequest;
 
-public class RequestSaveTestimony {
+public class RequestSaveTestimony implements IRequest {
 
 	@SerializedName("date")
 	private String date;
@@ -29,10 +29,10 @@ public class RequestSaveTestimony {
 
 	@Override
  	public String toString(){
-		return 
-			"RequestSaveTestimony{" + 
-			"date = '" + date + '\'' + 
-			",currentTestimony = '" + currentTestimony + '\'' + 
+		return
+			"RequestSaveTestimony{" +
+			"date = '" + date + '\'' +
+			",currentTestimony = '" + currentTestimony + '\'' +
 			"}";
 		}
 }
