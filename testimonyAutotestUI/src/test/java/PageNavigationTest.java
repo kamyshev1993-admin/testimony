@@ -4,10 +4,9 @@ import org.junit.jupiter.api.Assertions;
 public class PageNavigationTest extends TestBase {
 
     @Test
-    public void FromMainToSendAndBack() throws InterruptedException {
+    public void FromMainToSendAndBack() {
         applicationManager.getMainPage().clickSend();
         Assertions.assertEquals(applicationManager.getSendPage().getHeaderText(), "Передача показаний");
-        Thread.sleep(1000);
         applicationManager.getSendPage().clickBackButton();
         Assertions.assertEquals(applicationManager.getMainPage().getHeaderText(), "Neo ЖКХ");
     }

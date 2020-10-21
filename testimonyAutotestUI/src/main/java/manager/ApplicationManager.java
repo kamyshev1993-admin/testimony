@@ -6,6 +6,8 @@ import page.MainPage;
 import page.PricePage;
 import page.SendPage;
 
+import java.util.concurrent.TimeUnit;
+
 public class ApplicationManager {
     private WebDriver driver;
     private MainPage mainPage;
@@ -16,6 +18,7 @@ public class ApplicationManager {
     public void init() throws InterruptedException {
         driver = WebDriverFactory.getInstance();
         driver.get("http://127.0.0.1:5500/index.html");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         mainPage = new MainPage();
         sendPage = new SendPage();
         historyPage = new HistoryPage();

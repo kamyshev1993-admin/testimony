@@ -15,14 +15,19 @@ public abstract class BasePage {
     }
 
     protected void clickButton(By by) {
-        driver.findElement(by).click();
+        new Button(by).waitAndClick();
     }
 
     public String getHeaderText() {
         return new Head().getText();
     }
 
+    public BasePage insurePageLoaded() {
+        new Head().waitForElementVisible();
+        return this;
+    }
+
     public void clickBackButton() {
-        new Button(By.xpath("//*[@id = 'back_button']")).click();
+        new Button(By.xpath("//*[@id = 'back_button']")).waitAndClick();
     }
 }

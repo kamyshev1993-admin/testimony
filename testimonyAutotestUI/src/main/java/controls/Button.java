@@ -6,8 +6,7 @@ public class Button extends Control {
     public Button(By by) {
         super(by);
     }
-
-    public void click() {
-        webElement.click();
+    public void waitAndClick() {
+        waitForElementClickable().click();
     }
 }
