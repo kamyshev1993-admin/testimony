@@ -1,48 +1,34 @@
 package manager;
 
 import org.openqa.selenium.WebDriver;
-import page.HistoryPage;
-import page.MainPage;
-import page.PricePage;
-import page.SendPage;
-
+import org.openqa.selenium.remote.BrowserType;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class ApplicationManager {
-    private WebDriver driver;
-    private MainPage mainPage;
-    private SendPage sendPage;
-    private HistoryPage historyPage;
-    private PricePage pricePage;
 
-    public void init() throws InterruptedException {
-        driver = WebDriverFactory.getInstance();
-        driver.get("http://127.0.0.1:5500/index.html");
+    private WebDriver driver;
+    private PageManager pageManager;
+
+    public void init() throws IOException {
+        Properties properties = new Properties();
+        String target = System.getProperty("target", "local");
+        properties.load(new FileReader(new File(String.format("src/main/resources/%s.properties", target))));
+        driver = WebDriverFactory.getInstance(BrowserType.GOOGLECHROME);
+        pageManager = new PageManager(driver);
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        mainPage = new MainPage();
-        sendPage = new SendPage();
-        historyPage = new HistoryPage();
-        pricePage = new PricePage();
-        Thread.sleep(1000);
+        driver.get(properties.getProperty("web.baseUrl"));
     }
 
     public void close() {
         driver.quit();
     }
 
-    public MainPage getMainPage() {
-        return mainPage;
-    }
-
-    public SendPage getSendPage() {
-        return sendPage;
-    }
-
-    public HistoryPage getHistoryPage() {
-        return historyPage;
-    }
-
-    public PricePage getPricePage() {
-        return pricePage;
+    public PageManager getPageManager() {
+        return pageManager;
     }
 }

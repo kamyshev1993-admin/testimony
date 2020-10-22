@@ -1,19 +1,29 @@
 package page;
 
 import controls.Input;
-import model.Testimony;
+import manager.PageManager;
+import model.SendPageData;
 import org.openqa.selenium.By;
 
 public class SendPage extends BasePage {
 
-    private By sendButton = By.xpath("//input[@id='button']");
+    public SendPage(PageManager pageManager) {
+        super(pageManager);
+    }
 
-    public SendPage fillInfo(Testimony testimony) {
-        new Input("date").fill(testimony.getLocalDate().toString());
-        new Input("coldData").fill(testimony.getColdData());
-        new Input("hotData").fill(testimony.getHotData());
-        new Input("gasData").fill(testimony.getGasData());
-        new Input("elecData").fill(testimony.getElecData());
+    private By sendButton = By.xpath("//input[@id='button']");
+    private Input dateInput = new Input("date");
+    private Input coldDataInput = new Input("coldData");
+    private Input hotDataInput = new Input("hotData");
+    private Input gasDataInput = new Input("gasData");
+    private Input elecDataInput = new Input("elecData");
+
+    public SendPage fillInfo(SendPageData sendPageData) {
+        dateInput.fill(sendPageData.getDate());
+        coldDataInput.fill(sendPageData.getColdWater());
+        hotDataInput.fill(sendPageData.getHotWater());
+        gasDataInput.fill(sendPageData.getGas());
+        elecDataInput.fill(sendPageData.getElectric());
         return this;
     }
 

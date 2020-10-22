@@ -2,16 +2,17 @@ package page;
 
 import controls.Button;
 import controls.Head;
-import manager.WebDriverFactory;
+import manager.PageManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public abstract class BasePage {
 
     protected WebDriver driver;
-
-    protected BasePage() {
-        this.driver = WebDriverFactory.getInstance();
+    protected PageManager pageManager;
+    protected BasePage(PageManager pageManager) {
+        this.pageManager = pageManager;
+        this.driver = pageManager.getWebDriver();
     }
 
     protected void clickButton(By by) {

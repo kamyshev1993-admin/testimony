@@ -13,10 +13,10 @@ public class Input extends Control {
     }
 
     public void fill(String value) {
-        webElement.sendKeys(value);
+        getElement().sendKeys(value);
     }
 
     public void fill(Number number) {
-        webElement.sendKeys(String.valueOf(number));
+        getElement().sendKeys(String.valueOf(number));
     }
 }

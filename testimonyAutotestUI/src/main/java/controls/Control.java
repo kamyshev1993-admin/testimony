@@ -1,6 +1,6 @@
 package controls;
 
-import manager.WebDriverFactory;
+import manager.WebDriverRunner;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,19 +14,19 @@ public abstract class Control {
     protected final static int WAITING_TIME_IN_SECONDS = 30;
 
     private WebDriver driver;
-    protected WebElement webElement;
+    private By by;
 
     protected Control(By by) {
-        this.driver = WebDriverFactory.getInstance();
-        webElement = driver.findElement(by);
+        this.driver = WebDriverRunner.webDriver;
+        this.by = by;
     }
 
     public boolean isVisible() {
-        return webElement.isDisplayed();
+        return getElement().isDisplayed();
     }
 
     public String getText() {
-        return webElement.getText();
+        return getElement().getText();
     }
 
     protected boolean isElementPresent(By locator) {
@@ -40,11 +40,15 @@ public abstract class Control {
 
     protected WebElement waitForElementClickable() {
         return (new WebDriverWait(driver, WAITING_TIME_IN_SECONDS))
-                .until(ExpectedConditions.elementToBeClickable(webElement));
+                .until(ExpectedConditions.elementToBeClickable(getElement()));
     }
 
     public WebElement waitForElementVisible() {
         return (new WebDriverWait(driver, WAITING_TIME_IN_SECONDS))
-                .until(ExpectedConditions.visibilityOf(webElement));
+                .until(ExpectedConditions.visibilityOf(getElement()));
+    }
+
+    protected WebElement getElement() {
+        return driver.findElement(by);
     }
 }

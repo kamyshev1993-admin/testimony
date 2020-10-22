@@ -1,5 +1,6 @@
 package page;
 
+import manager.PageManager;
 import org.openqa.selenium.By;
 
 public class MainPage extends BasePage {
@@ -7,18 +8,22 @@ public class MainPage extends BasePage {
     private By dataHistory = By.xpath("//*[@id=\"history_button\"]");
     private By catalog = By.xpath("//*[@id=\"catalog_button\"]");
 
+    public MainPage(PageManager pageManager) {
+        super(pageManager);
+    }
+
     public SendPage clickSend() {
         clickButton(dataSend);
-        return new SendPage();
+        return pageManager.getSendPage();
     }
 
     public HistoryPage clickHistory() {
         clickButton(dataHistory);
-        return new HistoryPage();
+        return pageManager.getHistoryPage();
     }
 
     public PricePage clickPrice() {
         clickButton(catalog);
-        return new PricePage();
+        return pageManager.getPricePage();
     }
 }
